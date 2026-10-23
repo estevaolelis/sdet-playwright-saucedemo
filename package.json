@@ -1,0 +1,21 @@
+{
+  "name": "sdet-playwright-saucedemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/estevaolelis/sdet-playwright-saucedemo.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/estevaolelis/sdet-playwright-saucedemo/issues"
+  },
+  "homepage": "https://github.com/estevaolelis/sdet-playwright-saucedemo#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.5"
+  }
+}
