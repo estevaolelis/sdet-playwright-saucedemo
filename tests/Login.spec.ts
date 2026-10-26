@@ -5,12 +5,12 @@ test.describe('Login', () => {
     await loginPage.goto();
   });
 
-  test('login com usuário válido', async ({ loginPage, page }) => {
+  test('login with valid user', async ({ loginPage, page }) => {
     await loginPage.login('standard_user', 'secret_sauce');
     await expect(page).toHaveURL(/inventory/);
   });
 
-  test('erro com usuário bloqueado', async ({ loginPage }) => {
+  test('error with blocked user', async ({ loginPage }) => {
     await loginPage.login('locked_out_user', 'secret_sauce');
     await expect(loginPage.errorMessage).toContainText('locked out');
   });
