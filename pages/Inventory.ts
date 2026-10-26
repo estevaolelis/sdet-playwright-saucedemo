@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test' // Depois adiciona o Locator
+import { Locator, Page } from '@playwright/test'
 import { HeaderComponent } from './HeaderComponent';
 
 export class Inventory {
