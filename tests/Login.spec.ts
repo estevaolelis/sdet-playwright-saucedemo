@@ -1,12 +1,12 @@
 import { test, expect } from '../fixtures';
 
-test.describe('Login', () => {
+test.describe('Login', { tag: '@regression' }, () => {
   test.beforeEach(async ({ loginPage }) => {
     await loginPage.goto();
   });
 
   test.describe('with valid credentials', () => {
-    test('standard user lands on the inventory page', async ({ loginPage, page }) => {
+    test('standard user lands on the inventory page', { tag: '@smoke' }, async ({ loginPage, page }) => {
       await loginPage.login('standard_user', 'secret_sauce');
       await expect(page).toHaveURL(/inventory/);
     });

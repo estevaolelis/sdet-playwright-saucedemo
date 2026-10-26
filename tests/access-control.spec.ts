@@ -8,7 +8,7 @@ const protectedRoutes = [
   '/checkout-complete.html',
 ];
 
-test.describe('Access control', () => {
+test.describe('Access control', { tag: '@regression' }, () => {
   for (const route of protectedRoutes) {
     test(`Without login, ${route} redirect to login`, async ({ page, loginPage }) => {
       await page.goto(route);

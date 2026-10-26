@@ -50,6 +50,8 @@ npx playwright test
 
 | Command | Description |
 |---|---|
+| `npm run test:smoke` | Runs only the critical tests (`@smoke`) |
+| `npm run test:regression` | Runs the full suite (`@regression`) |
 | `npx playwright test --ui` | Opens the interactive UI mode |
 | `npx playwright show-report` | Opens the HTML report of the last run |
 | `npm run lint` | Runs ESLint |
@@ -62,6 +64,7 @@ npx playwright test
 - **Fixtures**: Page Objects are provided to the tests ready to use, with no repeated `new`.
 - **Stable locators**: uses `getByTestId` (SauceDemo's `data-test` attribute).
 - **Independent tests**: each test runs in isolation and does not depend on any other.
+- **Tags**: every `describe` is tagged `@regression` (full suite). Critical happy-path tests also get `@smoke`, for a fast health check.
 
 ## Continuous integration
 

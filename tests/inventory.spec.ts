@@ -1,16 +1,16 @@
 import { test, expect } from '../fixtures';
 
-test.describe(`Inventory`, () => {
+test.describe(`Inventory`, { tag: '@regression' }, () => {
     test.beforeEach(async ({ loginPage }) => {
         await loginPage.goto();
         await loginPage.login('standard_user', 'secret_sauce')
     })
 
-    test('display 6 products', async ({ inventoryPage }) => {
+    test('display 6 products', { tag: '@smoke' }, async ({ inventoryPage }) => {
         await expect(inventoryPage.items).toHaveCount(6);
   });
 
-  test('adding a product updates the cart badge', async ({ inventoryPage }) => {
+  test('adding a product updates the cart badge', { tag: '@smoke' }, async ({ inventoryPage }) => {
     await inventoryPage.addToCart("Sauce Labs Backpack");
     await expect(inventoryPage.header.cartBadge).toHaveText('1');
   });

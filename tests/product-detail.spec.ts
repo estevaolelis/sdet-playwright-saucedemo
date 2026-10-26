@@ -1,7 +1,7 @@
 // tests/product-detail.spec.ts
 import { test, expect } from '../fixtures';
 
-test.describe('Product detail', () => {
+test.describe('Product detail', { tag: '@regression' }, () => {
   test.beforeEach(async ({ loginPage }) => {
         await loginPage.goto();
         await loginPage.login('standard_user', 'secret_sauce')
@@ -28,7 +28,7 @@ test.describe('Product detail', () => {
   });
 }
 
-  test('back button returns to the inventory list', async ({ inventoryPage, productDetailPage, page }) => {
+  test('back button returns to the inventory list', { tag: '@smoke' }, async ({ inventoryPage, productDetailPage, page }) => {
     const productName = "Sauce Labs Backpack"
 
     await inventoryPage.openProduct(productName);
