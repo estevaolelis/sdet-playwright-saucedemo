@@ -2,7 +2,8 @@ import { Locator, Page } from '@playwright/test'
 import { HeaderComponent } from './HeaderComponent';
 
 export type SortOption = 'az' | 'za' | 'lohi' | 'hilo';
-export class Inventory {
+
+export class InventoryPage {
     readonly page: Page;
     readonly header: HeaderComponent;
     readonly title: Locator;
