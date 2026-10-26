@@ -46,4 +46,13 @@ export class InventoryPage {
         const texts = await this.page.getByTestId('inventory_item_price').allTextContents()
         return texts.map((t) => Number.parseFloat(t.replace('$', '')));
     }
+
+    async getProductsInfo(name: string) {
+        const card = this.product(name)
+        return {
+            name: await card.getByTestId('inventory-item-name').innerText(),
+            description: await card.getByTestId('inventory-item-desc').innerText(),
+            price: await card.getByTestId('inventory-item-price').innerText(),
+        }
+    }
 }

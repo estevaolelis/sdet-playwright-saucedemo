@@ -15,9 +15,9 @@ export class ProductDetailPage {
         this.header = new HeaderComponent(page);
         this.name = page.getByTestId('inventory-item-name');
         this.description = page.getByTestId('inventory-item-desc');
-        this.price = page.getByTestId('inventory_details_price');
-        this.image = page.getByTestId('inventory_details_img');
-        this.backButton = page.getByTestId('back-image')
+        this.price = page.getByTestId('inventory-item-price');
+        this.image = page.locator('img.inventory_details_img');
+        this.backButton = page.getByTestId('back-to-products')
     }
 
     async backToProducts() {
