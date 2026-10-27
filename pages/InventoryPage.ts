@@ -36,6 +36,7 @@ export class InventoryPage {
 
     async openProduct(name: string) {
         await this.product(name).getByTestId('inventory-item-name').click()
+        await this.page.waitForURL(/inventory-item/)
     }
 
     async getProductsNames(): Promise<string[]>{
