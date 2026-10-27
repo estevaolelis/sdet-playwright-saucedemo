@@ -9,6 +9,7 @@ export class InventoryPage {
   readonly title: Locator;
   readonly items: Locator;
   readonly sortDropdown: Locator;
+  readonly removeButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -16,6 +17,7 @@ export class InventoryPage {
     this.title = page.getByTestId("title");
     this.items = page.getByTestId("inventory-item");
     this.sortDropdown = page.getByTestId("product-sort-container");
+    this.removeButton = page.getByRole("button", { name: "Remove" });
   }
 
   product(name: string): Locator {

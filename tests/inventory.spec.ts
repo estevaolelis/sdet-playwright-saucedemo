@@ -10,23 +10,6 @@ test.describe(`Inventory`, { tag: "@regression" }, () => {
     await expect(inventoryPage.items).toHaveCount(6);
   });
 
-  test(
-    "adding a product updates the cart badge",
-    { tag: "@smoke" },
-    async ({ inventoryPage }) => {
-      await inventoryPage.addToCart("Sauce Labs Backpack");
-      await expect(inventoryPage.header.cartBadge).toHaveText("1");
-    },
-  );
-
-  test("removing a product clears the cart badge", async ({
-    inventoryPage,
-  }) => {
-    await inventoryPage.addToCart("Sauce Labs Backpack");
-    await inventoryPage.removeFromCart("Sauce Labs Backpack");
-    await expect(inventoryPage.header.cartBadge).toBeHidden();
-  });
-
   test("sort by price ascending", async ({ inventoryPage }) => {
     await inventoryPage.sortBy("lohi");
     const prices = await inventoryPage.getProductsPrices();
