@@ -11,7 +11,7 @@ End-to-end test automation project built with **Playwright** and **TypeScript**,
 - [Playwright](https://playwright.dev) (`@playwright/test`)
 - TypeScript
 - ESLint with `eslint-plugin-playwright`
-- GitHub Actions (CI)
+- GitHub Actions (CI) and GitHub Pages (test report)
 
 ## Project structure
 
@@ -20,6 +20,7 @@ End-to-end test automation project built with **Playwright** and **TypeScript**,
 ├── .github/workflows/   # CI pipeline (GitHub Actions)
 ├── fixtures/            # Custom Playwright fixtures
 ├── pages/               # Page Objects
+│   └── components/      # Shared components (header)
 ├── tests/               # Test specs
 ├── eslint.config.mjs    # ESLint configuration
 ├── playwright.config.ts # Playwright configuration
@@ -63,9 +64,11 @@ npx playwright test
 ## Conventions
 
 - **Page Object**: each page is a class holding its locators and actions. Assertions (`expect`) stay in the tests.
+- **Components**: elements shared across pages (like the header with the cart) live in their own class.
 - **Fixtures**: Page Objects are provided to the tests ready to use, with no repeated `new`.
-- **Stable locators**: uses `getByTestId` (SauceDemo's `data-test` attribute).
+- **Stable locators**: uses `getByTestId` (SauceDemo's `data-test` attribute) and `getByRole`.
 - **Independent tests**: each test runs in isolation and does not depend on any other.
+- **Data-driven tests**: repeated scenarios (such as the six products) are generated from a list.
 - **Tags**: every `describe` is tagged `@regression` (full suite). Critical happy-path tests also get `@smoke`, for a fast health check.
 
 ## Continuous integration
@@ -77,19 +80,26 @@ On every push or pull request to the `main` branch, GitHub Actions runs:
 3. Type check (`tsc`)
 4. Playwright tests
 5. HTML report upload as an artifact
+6. Report published to [GitHub Pages](https://estevaolelis.github.io/sdet-playwright-saucedemo/)
 
 ## Test coverage
 
-- [x] Login with a valid user
-- [x] Login with a locked-out user
+- [x] Login: valid user, slow user (`performance_glitch_user`), and locked-out user
+- [x] Access control: protected pages redirect to the login screen
+- [x] Inventory: product list and sorting (price and name)
+- [x] Product detail: data matches the inventory list, for all six products
+- [x] Cart: add, remove, badge, and persistence
+- [x] Checkout: complete purchase (happy path)
 
 ## Roadmap
 
 - [ ] More login scenarios (wrong password, empty fields)
-- [ ] Inventory and cart
-- [ ] Checkout
-- [ ] API tests
-- [ ] Report published on GitHub Pages
+- [ ] Checkout form validations and cancel flow
+- [ ] Known issues of `problem_user`, documented with `test.fail()`
+- [ ] Reuse login with `storageState`
+- [ ] Accessibility and visual regression tests
+- [ ] Scheduled runs and sharding in CI
+- [ ] API tests (in a separate project, since SauceDemo has no public API)
 
 ## Author
 
