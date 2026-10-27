@@ -1,4 +1,5 @@
 import { Locator, Page } from "@playwright/test";
+import { parsePrice } from "../utils/price";
 
 export class CheckoutOverviewPage {
   readonly page: Page;
@@ -19,5 +20,13 @@ export class CheckoutOverviewPage {
 
   async clickFinish() {
     await this.finishButton.click();
+  }
+
+  async getAmounts() {
+    return {
+      subtotal: parsePrice(await this.subtotal.innerText()),
+      tax: parsePrice(await this.tax.innerText()),
+      total: parsePrice(await this.total.innerText()),
+    };
   }
 }

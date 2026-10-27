@@ -1,4 +1,5 @@
 import { test, expect } from "../fixtures";
+import { parsePrice } from "../utils/price";
 
 test.describe("Checkout", { tag: "@regression" }, () => {
   const productName = "Sauce Labs Backpack";
@@ -38,6 +39,14 @@ test.describe("Checkout", { tag: "@regression" }, () => {
       await expect(page).toHaveURL(/checkout-step-two\.html/);
       await expect(checkoutOverviewPage.itemNames).toHaveText([productName]);
       await expect(checkoutOverviewPage.subtotal).toContainText(price);
+
+      const { subtotal, tax, total } = await checkoutOverviewPage.getAmounts();
+      expect(subtotal).toBeCloseTo(parsePrice(price), 2);
+      expect(total).toBeCloseTo(subtotal + tax, 2);
+
+      await expect(page).toHaveURL(/checkout-step-two\.html/);
+      await expect(checkoutOverviewPage.itemNames).toHaveText([productName]);
+      
       await checkoutOverviewPage.clickFinish();
 
       await expect(page).toHaveURL(/checkout-complete\.html/);
