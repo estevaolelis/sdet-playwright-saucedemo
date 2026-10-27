@@ -4,6 +4,8 @@
 
 End-to-end test automation project built with **Playwright** and **TypeScript**, targeting the practice website [SauceDemo](https://www.saucedemo.com). The goal is to practice and showcase SDET best practices: Page Object, fixtures, code quality, and CI.
 
+**[Latest test report](https://estevaolelis.github.io/sdet-playwright-saucedemo/)**
+
 ## Tech stack
 
 - [Playwright](https://playwright.dev) (`@playwright/test`)
