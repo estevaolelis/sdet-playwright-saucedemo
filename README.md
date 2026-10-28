@@ -4,14 +4,15 @@
 
 End-to-end test automation project built with **Playwright** and **TypeScript**, targeting the practice website [SauceDemo](https://www.saucedemo.com). The goal is to practice and showcase SDET best practices: Page Object, fixtures, code quality, and CI.
 
-**[Latest test report](https://estevaolelis.github.io/sdet-playwright-saucedemo/)**
+**Latest test reports:** [Playwright HTML](https://estevaolelis.github.io/sdet-playwright-saucedemo/) · [Allure](https://estevaolelis.github.io/sdet-playwright-saucedemo/allure/)
 
 ## Tech stack
 
 - [Playwright](https://playwright.dev) (`@playwright/test`)
 - TypeScript
 - ESLint with `eslint-plugin-playwright`
-- GitHub Actions (CI) and GitHub Pages (test report)
+- [Allure Report](https://allurereport.org) (alternative test report)
+- GitHub Actions (CI) and GitHub Pages (test reports)
 
 ## Project structure
 
@@ -57,6 +58,7 @@ npx playwright test
 | `npm run test:regression`    | Runs the full suite (`@regression`)      |
 | `npx playwright test --ui`   | Opens the interactive UI mode            |
 | `npx playwright show-report` | Opens the HTML report of the last run    |
+| `npm run report:allure`      | Generates and opens the Allure report    |
 | `npm run lint`               | Runs ESLint                              |
 | `npm run lint:fix`           | Automatically fixes ESLint issues        |
 | `npm run typecheck`          | Type-checks the project with TypeScript  |
@@ -75,15 +77,20 @@ npx playwright test
 
 ## Continuous integration
 
-On every push or pull request to the `main` branch, GitHub Actions runs:
+The pipeline runs on every push and pull request to `main`, on a weekday schedule (09:00 UTC), and on demand:
 
-1. Dependency installation
-2. Format check (Prettier)
-3. Lint (ESLint)
-4. Type check (`tsc`)
-5. Playwright tests
-6. HTML report upload as an artifact
-7. Report published to [GitHub Pages](https://estevaolelis.github.io/sdet-playwright-saucedemo/)
+```
+quality ──► test (3 shards) ──► report ──► deploy-report (main only)
+   └────────────┴──────► ci-status
+```
+
+1. **quality**: format check (Prettier), lint (ESLint), and type check (`tsc`).
+2. **test**: the suite is split into 3 shards that run in parallel, each inside the official Playwright Docker image (`mcr.microsoft.com/playwright`).
+3. **report**: merges the shards into one Playwright HTML report and generates the Allure report.
+4. **deploy-report**: publishes both reports to [GitHub Pages](https://estevaolelis.github.io/sdet-playwright-saucedemo/).
+5. **ci-status**: one check that fails if lint or tests fail. It is the required check in the branch protection rule, so a pull request cannot be merged while it is red.
+
+The scheduled run catches flaky tests and changes on SauceDemo even when nobody pushes code.
 
 ## Test coverage
 
@@ -101,7 +108,6 @@ On every push or pull request to the `main` branch, GitHub Actions runs:
 - [ ] Known issues of `problem_user`, documented with `test.fail()`
 - [ ] Reuse login with `storageState`
 - [ ] Accessibility and visual regression tests
-- [ ] Scheduled runs and sharding in CI
 - [ ] API tests (in a separate project, since SauceDemo has no public API)
 
 ## Author

@@ -9,7 +9,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: process.env.CI ? [["github"], ["html"]] : "html",
+  reporter: process.env.CI ? [["github"], ["blob"], ["allure-playwright"]] : [["html"], ["allure-playwright"]],
   use: {
     baseURL: "https://www.saucedemo.com",
     testIdAttribute: "data-test",
