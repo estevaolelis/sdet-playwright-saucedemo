@@ -8,6 +8,7 @@ export class CheckoutOverviewPage {
   readonly tax: Locator;
   readonly total: Locator;
   readonly finishButton: Locator;
+  readonly errorMessage: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -16,6 +17,7 @@ export class CheckoutOverviewPage {
     this.tax = page.getByTestId("tax-label");
     this.total = page.getByTestId("total-label");
     this.finishButton = page.getByTestId("finish");
+    this.errorMessage = page.getByTestId("error-button")
   }
 
   async clickFinish() {
