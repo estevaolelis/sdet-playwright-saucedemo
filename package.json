@@ -6,6 +6,7 @@
     "test": "playwright test",
     "test:smoke": "playwright test --grep \"@smoke\"",
     "test:regression": "playwright test --grep \"@regression\"",
+    "test:known-issues": "playwright test --grep \"@known-issue\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",

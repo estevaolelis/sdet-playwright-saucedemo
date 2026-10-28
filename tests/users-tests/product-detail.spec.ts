@@ -1,5 +1,5 @@
 // tests/product-detail.spec.ts
-import { test, expect } from "../fixtures";
+import { test, expect } from "../../fixtures";
 
 test.describe("Product detail", { tag: "@regression" }, () => {
   test.beforeEach(async ({ loginPage }) => {

@@ -4,7 +4,7 @@ import playwright from "eslint-plugin-playwright";
 
 export default tseslint.config(
   {
-    ignores: ["node_modules/", "playwright-report/", "test-results/"],
+    ignores: ["node_modules/", "playwright-report/", "test-results/", "blob-report/", "allure-results/", "allure-report/"],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,

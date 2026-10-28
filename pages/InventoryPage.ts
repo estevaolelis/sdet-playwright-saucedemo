@@ -46,8 +46,12 @@ export class InventoryPage {
   }
 
   async getProductsPrices(): Promise<number[]> {
-    const texts = await this.page.getByTestId("inventory_item_price").allTextContents();
+    const texts = await this.page.getByTestId("inventory-item-price").allTextContents();
     return texts.map((t) => Number.parseFloat(t.replace("$", "")));
+  }
+
+  async getProductsImages(): Promise<string[]> {
+    return this.items.getByRole("img").evaluateAll((images) => images.map((img) => img.getAttribute("src") ?? ""));
   }
 
   async getProductsInfo(name: string) {

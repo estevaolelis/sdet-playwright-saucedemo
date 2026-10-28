@@ -1,4 +1,4 @@
-import { test as base } from "@playwright/test";
+import { test as base, Page } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage";
 import { InventoryPage } from "../pages/InventoryPage";
 import { ProductDetailPage } from "../pages/ProductDetailPage";
@@ -6,8 +6,10 @@ import { CartPage } from "../pages/CartPage";
 import { CheckoutPage } from "../pages/CheckoutPage";
 import { CheckoutOverviewPage } from "../pages/CheckoutOverviewPage";
 import { CheckoutCompletePage } from "../pages/CheckoutCompletePage";
+import { PASSWORD, USERS } from "../utils/users";
 
 type MyFixtures = {
+  standardUserPage: Page;
   loginPage: LoginPage;
   inventoryPage: InventoryPage;
   productDetailPage: ProductDetailPage;
@@ -18,6 +20,17 @@ type MyFixtures = {
 };
 
 export const test = base.extend<MyFixtures>({
+  standardUserPage: async ({ browser, baseURL, viewport }, use) => {
+    const context = await browser.newContext({ baseURL, viewport });
+    const page = await context.newPage();
+    const loginPage = new LoginPage(page);
+    await loginPage.goto();
+    await loginPage.login(USERS.standard, PASSWORD);
+    await page.waitForURL(/inventory/);
+    await page.getByTestId("inventory-item").last().waitFor();
+    await use(page);
+    await context.close();
+  },
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
   },
