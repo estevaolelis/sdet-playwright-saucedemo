@@ -1,4 +1,7 @@
-import { defineConfig, devices } from '@playwright/test';
+import fs from 'node:fs';
+import { defineConfig, devices, chromium } from '@playwright/test';
+
+const hasBundledChromium = fs.existsSync(chromium.executablePath());
 
 export default defineConfig({
   testDir: './tests',
@@ -15,12 +18,12 @@ export default defineConfig({
   },
 
   projects: [
-  {
-    name: 'chromium',
-    use: {
-      ...devices['Desktop Chrome'],
-      channel: process.env.CI ? undefined : 'msedge',
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        ...(hasBundledChromium ? {} : { channel: 'msedge' }),
+      },
     },
-  },
-],
+  ],
 });
