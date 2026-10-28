@@ -1,21 +1,28 @@
 {
   "name": "sdet-playwright-saucedemo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "End-to-end test automation for SauceDemo with Playwright and TypeScript",
   "scripts": {
     "test": "playwright test",
     "test:smoke": "playwright test --grep \"@smoke\"",
     "test:regression": "playwright test --grep \"@regression\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/estevaolelis/sdet-playwright-saucedemo.git"
   },
-  "keywords": [],
+  "keywords": [
+    "playwright",
+    "typescript",
+    "sdet",
+    "e2e",
+    "page-object"
+  ],
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/estevaolelis/sdet-playwright-saucedemo/issues"

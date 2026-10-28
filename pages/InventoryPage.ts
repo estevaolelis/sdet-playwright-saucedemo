@@ -25,9 +25,7 @@ export class InventoryPage {
   }
 
   async addToCart(name: string) {
-    await this.product(name)
-      .getByRole("button", { name: "Add to cart" })
-      .click();
+    await this.product(name).getByRole("button", { name: "Add to cart" }).click();
   }
 
   async removeFromCart(name: string) {
@@ -48,9 +46,7 @@ export class InventoryPage {
   }
 
   async getProductsPrices(): Promise<number[]> {
-    const texts = await this.page
-      .getByTestId("inventory_item_price")
-      .allTextContents();
+    const texts = await this.page.getByTestId("inventory_item_price").allTextContents();
     return texts.map((t) => Number.parseFloat(t.replace("$", "")));
   }
 

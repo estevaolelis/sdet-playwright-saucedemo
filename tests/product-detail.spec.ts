@@ -7,20 +7,10 @@ test.describe("Product detail", { tag: "@regression" }, () => {
     await loginPage.login("standard_user", "secret_sauce");
   });
 
-  const productNames = [
-    "Sauce Labs Backpack",
-    "Sauce Labs Bike Light",
-    "Sauce Labs Bolt T-Shirt",
-    "Sauce Labs Fleece Jacket",
-    "Sauce Labs Onesie",
-    "Test.allTheThings() T-Shirt (Red)",
-  ];
+  const productNames = ["Sauce Labs Backpack", "Sauce Labs Bike Light", "Sauce Labs Bolt T-Shirt", "Sauce Labs Fleece Jacket", "Sauce Labs Onesie", "Test.allTheThings() T-Shirt (Red)"];
 
   for (const productName of productNames) {
-    test(`shows the same data as the inventory list: ${productName}`, async ({
-      inventoryPage,
-      productDetailPage,
-    }) => {
+    test(`shows the same data as the inventory list: ${productName}`, async ({ inventoryPage, productDetailPage }) => {
       const info = await inventoryPage.getProductsInfo(productName);
       await inventoryPage.openProduct(productName);
       await productDetailPage.waitForLoaded();
@@ -32,19 +22,15 @@ test.describe("Product detail", { tag: "@regression" }, () => {
     });
   }
 
-  test(
-    "back button returns to the inventory list",
-    { tag: "@smoke" },
-    async ({ inventoryPage, productDetailPage, page }) => {
-      const productName = "Sauce Labs Backpack";
+  test("back button returns to the inventory list", { tag: "@smoke" }, async ({ inventoryPage, productDetailPage, page }) => {
+    const productName = "Sauce Labs Backpack";
 
-      await inventoryPage.openProduct(productName);
-      await productDetailPage.waitForLoaded();
+    await inventoryPage.openProduct(productName);
+    await productDetailPage.waitForLoaded();
 
-      await productDetailPage.backToProducts();
+    await productDetailPage.backToProducts();
 
-      await expect(page).toHaveURL(/inventory\.html/);
-      await expect(inventoryPage.items).toHaveCount(6);
-    },
-  );
+    await expect(page).toHaveURL(/inventory\.html/);
+    await expect(inventoryPage.items).toHaveCount(6);
+  });
 });

@@ -27,7 +27,7 @@ export const test = base.extend<MyFixtures>({
   productDetailPage: async ({ page }, use) => {
     await use(new ProductDetailPage(page));
   },
-    cartPage: async ({ page }, use) => {
+  cartPage: async ({ page }, use) => {
     await use(new CartPage(page));
   },
   checkoutPage: async ({ page }, use) => {

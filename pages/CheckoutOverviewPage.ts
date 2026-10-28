@@ -17,7 +17,7 @@ export class CheckoutOverviewPage {
     this.tax = page.getByTestId("tax-label");
     this.total = page.getByTestId("total-label");
     this.finishButton = page.getByTestId("finish");
-    this.errorMessage = page.getByTestId("error-button")
+    this.errorMessage = page.getByTestId("error-button");
   }
 
   async clickFinish() {

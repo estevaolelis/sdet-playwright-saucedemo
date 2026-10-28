@@ -1,4 +1,4 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page } from "@playwright/test";
 
 export class CartPage {
   readonly page: Page;
@@ -9,10 +9,10 @@ export class CartPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.items = page.getByTestId('inventory-item');
-    this.itemNames = page.getByTestId('inventory-item-name');
-    this.checkoutButton = page.getByTestId('checkout');
-    this.continueShoppingButton = page.getByTestId('continue-shopping');
+    this.items = page.getByTestId("inventory-item");
+    this.itemNames = page.getByTestId("inventory-item-name");
+    this.checkoutButton = page.getByTestId("checkout");
+    this.continueShoppingButton = page.getByTestId("continue-shopping");
   }
 
   item(name: string): Locator {
@@ -20,7 +20,7 @@ export class CartPage {
   }
 
   async removeItem(name: string) {
-    await this.item(name).getByRole('button', { name: 'Remove' }).click();
+    await this.item(name).getByRole("button", { name: "Remove" }).click();
   }
 
   async clickCheckout() {

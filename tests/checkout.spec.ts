@@ -43,7 +43,7 @@ test.describe("Checkout", { tag: "@regression" }, () => {
     await expect(checkoutCompletePage.header).toBeVisible();
   });
 
-  test("order summary totals add up with several products", { tag: "@regression" }, async ({ inventoryPage, cartPage, checkoutPage, checkoutOverviewPage, page }) => {
+  test("order summary totals add up with several products", async ({ inventoryPage, cartPage, checkoutPage, checkoutOverviewPage, page }) => {
     const productNames = ["Sauce Labs Backpack", "Sauce Labs Bike Light"];
 
     let expectedSubtotal = 0;

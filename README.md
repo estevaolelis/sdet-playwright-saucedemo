@@ -20,8 +20,8 @@ End-to-end test automation project built with **Playwright** and **TypeScript**,
 ├── .github/workflows/   # CI pipeline (GitHub Actions)
 ├── fixtures/            # Custom Playwright fixtures
 ├── pages/               # Page Objects
-│   └── components/      # Shared components (header)
 ├── tests/               # Test specs
+├── utils/               # Helpers (e.g. price parsing)
 ├── eslint.config.mjs    # ESLint configuration
 ├── playwright.config.ts # Playwright configuration
 └── tsconfig.json        # TypeScript configuration
@@ -51,15 +51,17 @@ npx playwright test
 
 ### Useful commands
 
-| Command | Description |
-|---|---|
-| `npm run test:smoke` | Runs only the critical tests (`@smoke`) |
-| `npm run test:regression` | Runs the full suite (`@regression`) |
-| `npx playwright test --ui` | Opens the interactive UI mode |
-| `npx playwright show-report` | Opens the HTML report of the last run |
-| `npm run lint` | Runs ESLint |
-| `npm run lint:fix` | Automatically fixes ESLint issues |
-| `npm run typecheck` | Type-checks the project with TypeScript |
+| Command                      | Description                              |
+| ---------------------------- | ---------------------------------------- |
+| `npm run test:smoke`         | Runs only the critical tests (`@smoke`)  |
+| `npm run test:regression`    | Runs the full suite (`@regression`)      |
+| `npx playwright test --ui`   | Opens the interactive UI mode            |
+| `npx playwright show-report` | Opens the HTML report of the last run    |
+| `npm run lint`               | Runs ESLint                              |
+| `npm run lint:fix`           | Automatically fixes ESLint issues        |
+| `npm run typecheck`          | Type-checks the project with TypeScript  |
+| `npm run format`             | Formats the code with Prettier           |
+| `npm run format:check`       | Checks formatting without changing files |
 
 ## Conventions
 
@@ -76,11 +78,12 @@ npx playwright test
 On every push or pull request to the `main` branch, GitHub Actions runs:
 
 1. Dependency installation
-2. Lint (ESLint)
-3. Type check (`tsc`)
-4. Playwright tests
-5. HTML report upload as an artifact
-6. Report published to [GitHub Pages](https://estevaolelis.github.io/sdet-playwright-saucedemo/)
+2. Format check (Prettier)
+3. Lint (ESLint)
+4. Type check (`tsc`)
+5. Playwright tests
+6. HTML report upload as an artifact
+7. Report published to [GitHub Pages](https://estevaolelis.github.io/sdet-playwright-saucedemo/)
 
 ## Test coverage
 
@@ -89,12 +92,12 @@ On every push or pull request to the `main` branch, GitHub Actions runs:
 - [x] Inventory: product list and sorting (price and name)
 - [x] Product detail: data matches the inventory list, for all six products
 - [x] Cart: add, remove, badge, and persistence
-- [x] Checkout: complete purchase (happy path)
+- [x] Checkout: complete purchase (happy path), order summary totals, and required-field validation
 
 ## Roadmap
 
 - [ ] More login scenarios (wrong password, empty fields)
-- [ ] Checkout form validations and cancel flow
+- [ ] Checkout cancel flow
 - [ ] Known issues of `problem_user`, documented with `test.fail()`
 - [ ] Reuse login with `storageState`
 - [ ] Accessibility and visual regression tests
