@@ -3,9 +3,8 @@ import { test, expect } from "../fixtures";
 test.describe("Cart", { tag: "@regression" }, () => {
   const productName = "Sauce Labs Backpack";
 
-  test.beforeEach(async ({ loginPage }) => {
-    await loginPage.goto();
-    await loginPage.login("standard_user", "secret_sauce");
+  test.beforeEach(async ({ inventoryPage }) => {
+    await inventoryPage.goto();
   });
 
   test.describe("adding products", () => {

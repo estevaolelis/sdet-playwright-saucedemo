@@ -20,6 +20,10 @@ export class InventoryPage {
     this.removeButton = page.getByRole("button", { name: "Remove" });
   }
 
+  async goto() {
+    await this.page.goto("/inventory.html");
+  }
+
   product(name: string): Locator {
     return this.items.filter({ hasText: name });
   }

@@ -1,11 +1,8 @@
 import { test, expect } from "../fixtures";
-import { PASSWORD, USERS } from "../utils/users";
 
 test.describe("Menu", { tag: "@regression" }, () => {
-  test.beforeEach(async ({ loginPage, page }) => {
-    await loginPage.goto();
-    await loginPage.login(USERS.standard, PASSWORD);
-    await expect(page).toHaveURL(/inventory\.html/);
+  test.beforeEach(async ({ inventoryPage }) => {
+    await inventoryPage.goto();
   });
 
   test.describe("opening and closing", () => {

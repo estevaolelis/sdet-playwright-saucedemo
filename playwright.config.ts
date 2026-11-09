@@ -3,6 +3,13 @@ import { defineConfig, devices, chromium } from "@playwright/test";
 
 const hasBundledChromium = fs.existsSync(chromium.executablePath());
 
+const browserUse = {
+  ...devices["Desktop Chrome"],
+  ...(hasBundledChromium ? {} : { channel: "msedge" as const }),
+};
+
+export const STORAGE_STATE = "playwright/.auth/standard.json";
+
 export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
@@ -19,11 +26,22 @@ export default defineConfig({
 
   projects: [
     {
+      name: "setup",
+      testMatch: /auth\.setup\.ts/,
+      use: browserUse,
+    },
+
+    {
       name: "chromium",
-      use: {
-        ...devices["Desktop Chrome"],
-        ...(hasBundledChromium ? {} : { channel: "msedge" }),
-      },
+      use: { ...browserUse, storageState: STORAGE_STATE },
+      dependencies: ["setup"],
+      testIgnore: [/login\.spec\.ts/, /auth\.setup\.ts/],
+    },
+
+    {
+      name: "chromium-login",
+      use: browserUse,
+      testMatch: /login\.spec\.ts/,
     },
   ],
 });

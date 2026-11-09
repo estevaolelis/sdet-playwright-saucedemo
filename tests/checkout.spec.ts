@@ -4,9 +4,8 @@ import { parsePrice } from "../utils/price";
 test.describe("Checkout", { tag: "@regression" }, () => {
   const productName = "Sauce Labs Backpack";
 
-  test.beforeEach(async ({ loginPage }) => {
-    await loginPage.goto();
-    await loginPage.login("standard_user", "secret_sauce");
+  test.beforeEach(async ({ inventoryPage }) => {
+    await inventoryPage.goto();
   });
 
   test("completes a purchase with a single product", { tag: "@smoke" }, async ({ inventoryPage, cartPage, checkoutPage, checkoutOverviewPage, checkoutCompletePage, page }) => {
